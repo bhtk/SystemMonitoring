@@ -11,6 +11,13 @@ namespace SystemMonitor.Services
 {
     public class HttpService
     {
+        /// <summary>
+        /// Send Http Request to the specific url
+        /// </summary>
+        /// <param name="jobId">Id of executing job</param>
+        /// <param name="clientId">Id of executor client</param>
+        /// <param name="url">url which will be used for http request</param>
+        /// <returns>ServiceOutput object</returns>
         public static ServiceOutput SendHttpRequest(long jobId, long clientId, string url)
         {
             var httpRequest = (HttpWebRequest) WebRequest.Create("http://" + url);
