@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemMonitor", "SystemMonitor\SystemMonitor.csproj", "{0114FBCD-F3E3-4C86-8365-4A840D988F2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemMonitoringServer", "SystemMonitoringServer\SystemMonitoringServer.csproj", "{13405252-31E0-47EA-B195-A0DC53F4CDEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemMonitoringClient", "SystemMonitoringClient\SystemMonitoringClient.csproj", "{D9AFF577-6653-40C0-861F-C091D6E1904C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemMonitoringPanel", "SystemMonitoringPanel\SystemMonitoringPanel.csproj", "{2DE32A79-022C-4BA7-A978-A7E092EE64AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +19,18 @@ Global
 		{0114FBCD-F3E3-4C86-8365-4A840D988F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0114FBCD-F3E3-4C86-8365-4A840D988F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0114FBCD-F3E3-4C86-8365-4A840D988F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13405252-31E0-47EA-B195-A0DC53F4CDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13405252-31E0-47EA-B195-A0DC53F4CDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13405252-31E0-47EA-B195-A0DC53F4CDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13405252-31E0-47EA-B195-A0DC53F4CDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9AFF577-6653-40C0-861F-C091D6E1904C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9AFF577-6653-40C0-861F-C091D6E1904C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9AFF577-6653-40C0-861F-C091D6E1904C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9AFF577-6653-40C0-861F-C091D6E1904C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DE32A79-022C-4BA7-A978-A7E092EE64AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DE32A79-022C-4BA7-A978-A7E092EE64AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DE32A79-022C-4BA7-A978-A7E092EE64AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DE32A79-022C-4BA7-A978-A7E092EE64AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
