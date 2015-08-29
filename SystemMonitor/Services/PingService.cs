@@ -17,7 +17,7 @@ namespace SystemMonitor.Services
         /// <param name="clientId">Id of executor client</param>
         /// <param name="url">url which will be pinged</param>
         /// <returns>ServiceOutput object</returns>
-        public ServiceOutput SendPing(long jobId, long clientId, string url)
+        public static ServiceOutput SendPingRequest(long jobId, long clientId, string url)
         {
             using (var pingSender = new Ping())
             {
