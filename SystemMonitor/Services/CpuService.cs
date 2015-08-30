@@ -19,22 +19,66 @@ namespace SystemMonitor.Services
         /// <returns>ServiceOutput object</returns>
         public static ServiceOutput GetTotalCpuUsage(long jobId, long clientId)
         {
-            var cpuCounter = new PerformanceCounter()
+            using (var cpuCounter = new PerformanceCounter())
             {
-                CategoryName = "Processor",
-                CounterName = "% Processor Time",
-                InstanceName = "_Total"
-            };
-            cpuCounter.NextValue();
-            Thread.Sleep(1000);
-            return new ServiceOutput()
+                cpuCounter.CategoryName = "Processor";
+                cpuCounter.CounterName = "% Processor Time";
+                cpuCounter.InstanceName = "_Total";
+                cpuCounter.NextValue();
+                Thread.Sleep(1000);
+                return new ServiceOutput()
+                {
+                    JobId = jobId,
+                    ClientId = clientId,
+                    Result = (long)cpuCounter.NextValue(),
+                    Duration = -1,
+                    Date = DateTime.Now
+                };
+            }
+        }
+        
+        /// <summary>
+        /// Returnes cpu usage of a specific process
+        /// </summary>
+        /// <param name="jobId">Id of executing job</param>
+        /// <param name="clientId">Id of executor client</param>
+        /// <param name="processName">name of the process</param>
+        /// <returns>ServiceOutput object</returns>
+        public static ServiceOutput GetCpuUsageOfSpecificProcess(long jobId, long clientId, string processName)
+        {
+            PerformanceCounter cpuCounter;
+            var sum = (float)0;
+            try
             {
-                JobId = jobId,
-                ClientId = clientId,
-                Result = (long)cpuCounter.NextValue(),
-                Duration = -1,
-                Date = DateTime.Now
-            };
+                var processes = Process.GetProcessesByName(processName);
+                foreach (var process in processes)
+                {
+                    cpuCounter = new PerformanceCounter("Processor", "% Processor Time", process.ProcessName, true);
+                    cpuCounter.NextValue();
+                    Thread.Sleep(250);
+                    sum += cpuCounter.NextValue();
+                    cpuCounter.Dispose();
+                }
+                return new ServiceOutput()
+                {
+                    JobId = jobId,
+                    ClientId = clientId,
+                    Result = (long) sum,
+                    Duration = -1,
+                    Date = DateTime.Now
+                };
+            }
+            catch
+            {
+                return new ServiceOutput()
+                {
+                    JobId = jobId,
+                    ClientId = clientId,
+                    Result = -1,
+                    Duration = -1,
+                    Date = DateTime.Now
+                };
+            }
         }
     }
 }
