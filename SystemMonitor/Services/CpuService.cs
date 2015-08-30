@@ -11,6 +11,12 @@ namespace SystemMonitor.Services
 {
     public class CpuService
     {
+        /// <summary>
+        /// Get Total usage of cpu
+        /// </summary>
+        /// <param name="jobId">Id of executing job</param>
+        /// <param name="clientId">Id of executor client</param>
+        /// <returns>ServiceOutput object</returns>
         public static ServiceOutput GetTotalCpuUsage(long jobId, long clientId)
         {
             var cpuCounter = new PerformanceCounter()
