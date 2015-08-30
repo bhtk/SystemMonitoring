@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\JobStatus.cs" />
+    <Compile Include="Enums\JobType.cs" />
     <Compile Include="Models\UtilityModels\ServiceOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
