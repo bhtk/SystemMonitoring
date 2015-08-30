@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,61 +10,61 @@ using SystemMonitor.Models.UtilityModels;
 
 namespace SystemMonitor.Services
 {
-    public class CpuService
+
+    public class MemoryService
     {
         /// <summary>
-        /// Get Total usage of cpu
+        /// Get Total memory occupation
         /// </summary>
         /// <param name="jobId">Id of executing job</param>
         /// <param name="clientId">Id of executor client</param>
         /// <returns>ServiceOutput object</returns>
-        public static ServiceOutput GetTotalCpuUsage(long jobId, long clientId)
+        public static ServiceOutput GetTotalMemoryOccupation(long jobId, long clientId)
         {
-            using (var cpuCounter = new PerformanceCounter())
+            using (var ramCounter = new PerformanceCounter())
             {
-                cpuCounter.CategoryName = "Processor";
-                cpuCounter.CounterName = "% Processor Time";
-                cpuCounter.InstanceName = "_Total";
-                cpuCounter.NextValue();
+                ramCounter.CategoryName = "Memory";
+                ramCounter.CounterName = "Available MBytes";
+                ramCounter.NextValue();
                 Thread.Sleep(500);
                 return new ServiceOutput()
                 {
                     JobId = jobId,
                     ClientId = clientId,
-                    Result = (long)cpuCounter.NextValue(),
+                    Result = (long)ramCounter.NextValue(),
                     Duration = -1,
                     Date = DateTime.Now
                 };
             }
         }
-        
+
         /// <summary>
-        /// Returnes cpu usage of a specific process
+        /// Returnes memory occupation of a specific process
         /// </summary>
         /// <param name="jobId">Id of executing job</param>
         /// <param name="clientId">Id of executor client</param>
         /// <param name="processName">name of the process</param>
         /// <returns>ServiceOutput object</returns>
-        public static ServiceOutput GetCpuUsageOfSpecificProcess(long jobId, long clientId, string processName)
+        public static ServiceOutput GetMemoryOccupationOfSpecificProcess(long jobId, long clientId, string processName)
         {
-            PerformanceCounter cpuCounter;
+            PerformanceCounter ramCounter;
             var sum = (float)0;
             try
             {
                 var processes = Process.GetProcessesByName(processName);
                 foreach (var process in processes)
                 {
-                    cpuCounter = new PerformanceCounter("Process", "% Processor Time", process.ProcessName, true);
-                    cpuCounter.NextValue();
+                    ramCounter = new PerformanceCounter("Process", "Private Bytes", process.ProcessName, true);
+                    ramCounter.NextValue();
                     Thread.Sleep(250);
-                    sum += cpuCounter.NextValue();
-                    cpuCounter.Dispose();
+                    sum += ramCounter.NextValue();
+                    ramCounter.Dispose();
                 }
                 return new ServiceOutput()
                 {
                     JobId = jobId,
                     ClientId = clientId,
-                    Result = (long) sum,
+                    Result = (long)sum,
                     Duration = -1,
                     Date = DateTime.Now
                 };
